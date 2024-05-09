@@ -4,6 +4,19 @@
 #include "shop.h"
 
 /*
+ * Name: print_options()
+ * Description: Print options to the user
+ */
+void print_options();
+
+/*
+ * Name: print_selection_error
+ * Description: Scolds the user for selecting a bad option
+ *		number
+ */
+void print_selection_error();
+
+/*
  * THIS IS A SUGGESTED FUNCTION. IT IS IMPLEMENTED FOR YOU IN
  *		`display.cpp`
  * Name: get_option
@@ -23,5 +36,7 @@ int get_option();
  *			between 1 and 7 (inclusive).
  */
 void execute_option(shop& s, int option);
+
+void option_2_prompts(const shop& s, std::string name, double small_cost, double medium_cost, double large_cost);
 
 #endif

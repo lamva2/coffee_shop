@@ -20,6 +20,9 @@ public:
 	 */
 	menu();
 
+	// Deconstructor for coffees
+	~menu();
+
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
 	 *		YOU MUST IMPLEMENT IT IN `menu.cpp`. THIS FUNCTION IS USED
@@ -32,6 +35,11 @@ public:
 	 *		reallocated, and num_coffees should be incremented by 1)
 	 */
 	void add_coffee(const coffee& c);
+
+	int menu::find_num_coffees(std::ifstream& file);
+	void menu::create_coffee_array();
+	void menu::populate_coffee_array(int num_coffees, std::ifstream& file);
+	void menu::populate_new_coffee(coffee& c, std::string name, double small, double medium, double large);
 };
 
 #endif

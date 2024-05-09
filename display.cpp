@@ -1,11 +1,6 @@
 #include <iostream>
 #include "display.h"
 
-/*
- * THIS IS A SUGGESTED FUNCTION.
- * Name: print_options()
- * Description: Print options to the user
- */
 void print_options() {
 	std::cout << "What would you like to do?" << std::endl;
 	std::cout << "	1. View shop info" << std::endl;
@@ -44,11 +39,38 @@ int get_option() {
 	return option;
 }
 
+void option_2_prompts(const shop& s, std::string name, double small_cost, double medium_cost, double large_cost) {
+	std::cout << "Enter the name of the new coffee drink (in 1 word): ";
+	std::cin >> name;
+	std::cout << "Enter price of small size (8oz): ";
+	std::cin >> small_cost;
+	std::cout << "Enter price of medium size (12oz): ";
+	std::cin >> medium_cost;
+	std::cout << "Enter price of large size (16oz): ";
+	std::cin >> large_cost;
+} 
+
+
 void execute_option(shop& s, int option) {
 	if (option == 1) {
-		// TODO Display shop info
+		// Access shop_info.txt and reads shop information
+		std::ifstream populate_shop_from_file_stream;
+		populate_shop_from_file_stream.open("shop_info.txt");
+		s.populate_shop_from_file(populate_shop_from_file_stream);
 	} else if (option == 2) {
-		// TODO Guide user through adding a coffee to the menu
+		// Initialize variables that user will input
+		std::string name;
+		double small_cost, medium_cost, large_cost;
+		// Create stream to menu.txt file
+		std::ifstream stream_to_menu;
+    	stream_to_menu.open("menu.txt");
+		// Prompt the user for new coffee information
+		option_2_prompts(s, name, small_cost, medium_cost, large_cost);
+		// Create a new coffee object
+		coffee c;
+		menu m; // use constructor to make this when making shop object!!!
+		// Creates & populates coffees array, and adds new coffee to array
+		s.option_2(m, c, stream_to_menu, name, small_cost, medium_cost, large_cost);
 	} else if (option == 3) {
 		// TODO Guide user through removing a coffee from the menu
 	} else if (option == 4) {

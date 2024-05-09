@@ -20,6 +20,10 @@ public:
 	 *		and all costs of 0
 	 */
 	coffee();
+
+	void coffee::set_a_coffee(coffee& c, std::ifstream& file);
+	void coffee::set_a_coffee_from_user(std::string name, double small, double medium, double large);
+
 };
 
 #endif

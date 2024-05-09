@@ -2,6 +2,7 @@
 #define SHOP_H
 
 #include <string>
+#include <fstream>
 
 #include "menu.h"
 #include "order.h"
@@ -30,6 +31,12 @@ public:
 	 */
 	shop();
 
+	// Deconstructor
+	~shop();
+
+	
+	void shop::option_2(menu& m, coffee& c, std::ifstream& file, std::string name, double small, double medium, double large);
+
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
 	 *		YOU MUST IMPLEMENT IT IN `shop.cpp`. THIS FUNCTION IS USED
@@ -54,6 +61,15 @@ public:
 	 *		reallocated, and num_orders should be incremented by 1)
 	 */
 	void add_order(const order& o);
+
+	/*
+	 * Name: populate_from_file
+	 * Description: Reads address and phone number of shop from file and
+	 * 		prints to terminal.
+	 * Parameters:
+	 *		o file (std::ifstream&): Reference to input file stream to file.
+	 */
+	void populate_shop_from_file(std::ifstream& file);
 };
 
 #endif
