@@ -34,8 +34,22 @@ public:
 	// Deconstructor
 	~shop();
 
-	
-	void shop::option_2(menu& m, coffee& c, std::ifstream& file, std::string name, double small, double medium, double large);
+	// Option 2 functions
+	void option_2(menu& m, coffee& c, std::ifstream& input_file, std::ofstream& output_file, std::string name, double small, double medium, double large);
+
+	// Option 3 functions
+	int get_user_selection();
+	void print_drink_options(menu& m);
+	void remove_coffee_from_array(menu& m, int user_input);
+
+	// Option 4 functions
+	void option_4(menu& m, const std::string& name);
+
+	// Option 5 functions
+	void option_5(menu& m, const double& budget);
+
+	// Option 6 functions
+	void option_6(menu& m, const int& selection);
 
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.

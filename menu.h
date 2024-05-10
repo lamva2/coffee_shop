@@ -36,10 +36,15 @@ public:
 	 */
 	void add_coffee(const coffee& c);
 
-	int menu::find_num_coffees(std::ifstream& file);
-	void menu::create_coffee_array();
-	void menu::populate_coffee_array(int num_coffees, std::ifstream& file);
-	void menu::populate_new_coffee(coffee& c, std::string name, double small, double medium, double large);
+	int find_num_coffees(std::ifstream& file);
+	void create_coffee_array();
+	void populate_coffee_array(int num_coffees, std::ifstream& file);
+	void populate_new_coffee(coffee& c, std::string name, double small, double medium, double large);
+	void remove_coffee(int coffee_number);
+	void print_drink_options();
+	void display_coffee_with_name(const std::string& name);
+	void display_coffees_with_price(const double& budget);
+	void display_coffee_with_index(const int& selection);
 };
 
 #endif

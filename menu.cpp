@@ -61,3 +61,70 @@ void menu::add_coffee(const coffee& c) {
     //Increment this->num_coffees
     this->num_coffees++;
 }
+
+
+// Creates a smaller array to store coffees after removing a coffee
+void menu::remove_coffee(int coffee_number) {
+    coffee* new_coffees = new coffee[this->num_coffees - 1];
+    for (int i = 0; i < this->num_coffees; i++) {
+        if (i < coffee_number - 1) {
+            new_coffees[i] = this->coffees[i];
+        }
+        if (i > coffee_number - 1) {
+            new_coffees[i-1] = this->coffees[i];
+        }
+    }
+    if (this->coffees != nullptr) {
+        delete [] this->coffees;
+    }
+    this->coffees = new_coffees;
+    this->num_coffees--;
+}
+
+// For option 3 and option 6, prints drink options from menu
+void menu::print_drink_options() {
+    for (int i = 0; i < this->num_coffees; i++) {
+        std::cout << (i+1) << ". " << this->coffees[i].get_coffee_name() << std::endl;
+    }
+}
+
+void menu::display_coffee_with_name(const std::string& name) {
+    bool exists = false;
+    for (int i = 0; i < this->num_coffees; i++) {
+        if (this->coffees[i].get_coffee_name() == name) {
+            this->coffees[i].get_coffee_info();
+            exists = true;
+        } else {
+            continue;
+        }
+    }
+    if (exists == false) {
+        std::cout << "Sorry, we don't have that product at the moment." << std::endl;
+    }
+}
+
+void menu::display_coffees_with_price(const double& budget) {
+    for (int i = 0; i < this->num_coffees; i++) {
+        if (this->coffees[i].get_small_cost() <= budget || 
+            this->coffees[i].get_medium_cost() <= budget || this-> coffees[i].get_medium_cost() <= budget) {
+                std::cout << this->coffees[i].get_coffee_name();
+            }
+        if (this->coffees[i].get_small_cost() <= budget) {
+            std::cout << "Small: " << this->coffees[i].get_small_cost() << std::endl;   
+        }
+        if (this-> coffees[i].get_medium_cost() <= budget) {
+            std::cout << "Medium: " << this->coffees[i].get_medium_cost() << std::endl;
+        }
+        if (this-> coffees[i].get_large_cost() <= budget) {
+            std::cout << "Large: " << this->coffees[i].get_large_cost() << std::endl;
+        }
+    }
+}
+
+void menu::display_coffee_with_index(const int& selection) {
+    for (int i = 0; i < this->num_coffees; i++) {
+        if ((i+1) == selection) {
+            this->coffees[i].get_coffee_info();
+        } 
+    }
+}

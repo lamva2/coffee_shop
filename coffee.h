@@ -21,9 +21,13 @@ public:
 	 */
 	coffee();
 
-	void coffee::set_a_coffee(coffee& c, std::ifstream& file);
-	void coffee::set_a_coffee_from_user(std::string name, double small, double medium, double large);
-
+	void set_a_coffee(coffee& c, std::ifstream& file);
+	void set_a_coffee_from_user(std::string name, double small, double medium, double large);
+	std::string get_coffee_name();
+	void get_coffee_info();
+	double get_small_cost();
+	double get_medium_cost();
+	double get_large_cost();
 };
 
 #endif
