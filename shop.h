@@ -34,22 +34,31 @@ public:
 	// Deconstructor
 	~shop();
 
+	// Creates and populates initial coffees array
+	void coffee_array(std::ifstream& file);
+
+	// Creates initial orders array
+	void orders_array();
+
+	// Prints menu to terminal
+	void print_menu();
+
 	// Option 2 functions
-	void option_2(menu& m, coffee& c, std::ifstream& input_file, std::ofstream& output_file, std::string name, double small, double medium, double large);
+	void option_2(coffee& c, std::string name, double small, double medium, double large);
 
 	// Option 3 functions
 	int get_user_selection();
-	void print_drink_options(menu& m);
-	void remove_coffee_from_array(menu& m, int user_input);
+	void print_drink_options();
+	void remove_coffee_from_array(int user_input);
 
 	// Option 4 functions
-	void option_4(menu& m, const std::string& name);
+	void option_4(const std::string& name);
 
 	// Option 5 functions
-	void option_5(menu& m, const double& budget);
+	void option_5(const double& budget);
 
 	// Option 6 functions
-	void option_6(menu& m, const int& selection);
+	void option_6(const int& selection);
 
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
@@ -84,6 +93,14 @@ public:
 	 *		o file (std::ifstream&): Reference to input file stream to file.
 	 */
 	void populate_shop_from_file(std::ifstream& file);
+
+	void print_revenue();
+	void print_orders();
+
+	void populate_new_order(order& o, int selection, char coffee_size, int quantity);
+	double calculate_order_cost(order& o);
+	void calculate_revenue(double& revenue, double new_order);
+	void print_order_message(order& o);
 };
 
 #endif

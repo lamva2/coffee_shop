@@ -10,6 +10,7 @@ int main() {
 
 	shop s; // Initializes shop object 's'
 	int option;
+	create_coffees_array(s); // Creates initial menu (coffees array)
 	do {
 		option = get_option();
 		if (option >= 1 && option <= 6) {

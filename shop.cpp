@@ -16,12 +16,56 @@ shop::~shop() {
 }
 
 // Calls public menu member functions to populate coffees array and add new coffee to the array (option 2)
-void shop::option_2(menu& m, coffee& c, std::ifstream& input_file, std::ofstream& output_file, std::string name, double small, double medium, double large) {
-    int num_coffees = m.find_num_coffees(input_file);
-    m.create_coffee_array();
-    m.populate_coffee_array(num_coffees, input_file);
-    m.populate_new_coffee(c, name, small, medium, large);
-    m.add_coffee(c);
+void shop::coffee_array(std::ifstream& file) {
+    this->m.create_coffee_array();
+    this->m.populate_coffee_array(file);
+}
+
+// Creates orders array
+void shop::orders_array() {
+    this->orders = new order[this->num_orders];
+}
+
+// Option 1: Prints the menu
+void shop::print_menu() {
+    this->m.print_menu();
+}
+
+// Option 1: Print the shop address and the phone number
+void shop::populate_shop_from_file(std::ifstream& file) {
+    std::getline(file, this->phone);
+    std::getline(file, this->address);
+    std::cout << std::endl << "Address: " << this->address 
+        << std::endl << "Phone: " << this->phone << std::endl;
+}
+
+void shop::print_revenue() {
+    std::cout << "The shop revenue is: $" << this->revenue << std::endl;
+}
+
+void shop::print_orders() {
+    std::cout << "Order info:" << std::endl;
+    for (int i = 0; i < this->num_orders; i++) {
+        std::cout << this->orders[i].get_order_number() << " "
+            << this->orders[i].get_coffee_name() << " "
+            << this->orders[i].get_order_size() << " "
+            << this->orders[i].get_order_quantity() << std::endl;
+    }
+}
+
+// Populates new coffee object with information from user
+void shop::option_2(coffee& c, std::string name, double small, double medium, double large) {
+    this->m.populate_new_coffee(c, name, small, medium, large);
+}
+
+// Adds new coffee object to coffees array (menu)
+void shop::add_coffee_to_menu(const coffee& c) {
+    this->m.add_coffee(c);
+}
+
+// Calls public menu member functions to print drink options from menu (used in option 3 & 6)
+void shop::print_drink_options() {
+    this->m.print_drink_options();
 }
 
 // Gets user selection for drink to remove (option 3)
@@ -32,46 +76,79 @@ int shop::get_user_selection() {
     return drink_selection;
 }
 
-// Calls public menu member functions to print drink options from menu (option 3 & 6)
-void shop::print_drink_options(menu& m) {
-    m.print_drink_options();
-}
-
 // Removes coffee from array (option 3)
-void shop::remove_coffee_from_array(menu& m, int user_input) {
-    m.remove_coffee(user_input);
+void shop::remove_coffee_from_array(int user_input) {
+    this->m.remove_coffee(user_input);
 }
 
 // Displays coffee information with name that user inputs (option 4)
-void shop::option_4(menu& m, const std::string& name) {
-    m.display_coffee_with_name(name);
+void shop::option_4(const std::string& name) {
+    this->m.display_coffee_with_name(name);
 }
 
-void shop::option_5(menu& m, const double& budget) {
-    m.display_coffees_with_price(budget);
+void shop::option_5(const double& budget) {
+    this->m.display_coffees_with_price(budget);
 }
 
-void shop::option_6(menu& m, const int& selection) {
-    m.display_coffee_with_index(selection);
+// Displays information about the coffee the user would like to order
+void shop::option_6(const int& selection) {
+    this->m.display_coffee_with_index(selection);
 }
 
 
-/* required function!!!
-void shop::add_coffee_to_menu(const coffee& c) {
-    
-    // Access menu.txt and adds new coffee item to menu
-	std::ofstream populate_menu_stream;
-	populate_menu_stream.open("menu.txt", std::ios::app);
-     
+// Populates a new order object from information given by the user
+void shop::populate_new_order(order& o, int selection, char coffee_size, int quantity) {
+    std::string coffee_name;
+    for (int i = 0; i < this->m.get_num_coffees(); i++) {
+        if ((i+1) == selection) {
+            coffee_name = this->m.get_coffee_name(i);
+        }
+    }
+    o.set_order_from_user(this->num_orders + 1, coffee_name, coffee_size, quantity);
 }
-*/
+
+// Adds new order to orders array 
 void shop::add_order(const order& o) {
-
+    // Creates new, bigger array to store existing orders plus the new order
+    order* new_orders = new order[this->num_orders + 1];
+    // Copy the coffee elements from the old array to the new one (if it's not empty; if it's empty,
+    //      this loop will iterate 0 times)
+    for (int i = 0; i < this->num_orders; i++) {
+        new_orders[i] = this->orders[i];
+    }
+    // Put new coffee into last index of new array
+    new_orders[this->num_orders] = o;
+    // Delete old array (it it's not empty)
+    if (this->orders != nullptr) {
+        delete [] this->orders;
+    }
+    // Reassign this->coffees to point to the new, bigger array
+    this->orders = new_orders;
+    //Increment this->num_coffees
+    this->num_orders++;
 }
 
-void shop::populate_shop_from_file(std::ifstream& file) {
-    std::getline(file, this->phone);
-    std::getline(file, this->address);
-    std::cout << std::endl << "Address: " << this->address 
-        << std::endl << "Phone: " << this->phone << std::endl;
+// Calculates the cost of an order and returns it. Also adds order total cost to revenue.
+double shop::calculate_order_cost(order& o) {
+    double cost_per_drink;
+    double total_cost;
+    for (int i = 0; i < this->m.get_num_coffees(); i++) {
+        if (o.get_coffee_name() == this->m.get_coffee_name(i)) {
+            if (o.get_order_size() == 's') {
+                cost_per_drink = this->m.get_small_cost(i);
+            } else if (o.get_order_size() == 'm') {
+                cost_per_drink = this->m.get_medium_cost(i);
+            } else if (o.get_order_size() == 'l') {
+                cost_per_drink = this->m.get_large_cost(i);
+            }
+        }
+    }
+    total_cost = cost_per_drink * o.get_order_quantity();
+    this->revenue += total_cost;
+    return total_cost;
 }
+
+void shop::print_order_message(order& o) {
+    std::cout << "Your order has been placed. Your order number is " << o.get_order_number() << "." << std::endl;
+}
+

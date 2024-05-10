@@ -40,7 +40,7 @@ int get_option() {
 	return option;
 }
 
-void option_2_prompts(const shop& s, std::string name, double small_cost, double medium_cost, double large_cost) {
+void option_2_prompts(std::string name, double small_cost, double medium_cost, double large_cost) {
 	std::cout << "Enter the name of the new coffee drink (in 1 word): ";
 	std::cin >> name;
 	std::cout << "Enter price of small size (8oz): ";
@@ -87,39 +87,48 @@ int option_6_prompt_for_quantity() {
 	return quantity;
 }
 
+// Creates coffees array
+void create_coffees_array(shop& s) {
+	// Create input stream to menu.txt file
+	std::ifstream input_stream_to_menu;
+    input_stream_to_menu.open("menu.txt");
+	// Creates and populates initial coffees array
+	s.coffee_array(input_stream_to_menu);
+}
+
 void execute_option(shop& s, int option) {
 	if (option == 1) {
 		// Access shop_info.txt and reads shop information
 		std::ifstream populate_shop_from_file_stream;
 		populate_shop_from_file_stream.open("shop_info.txt");
 		s.populate_shop_from_file(populate_shop_from_file_stream);
+		s.print_revenue();
+		std::cout << std::endl;
+		s.print_menu();
+		std::cout << std::endl;
+		s.print_orders();
 	} else if (option == 2) {
 		// Initialize variables that user will input
 		std::string name;
 		double small_cost, medium_cost, large_cost;
-		// Create input stream to menu.txt file
-		std::ifstream input_stream_to_menu;
-    	input_stream_to_menu.open("menu.txt");
-		// Create output stream to menu.txt file
-		std::ofstream output_stream_to_menu;
-		output_stream_to_menu.open("menu.txt", std::ios::app);
 		// Prompt the user for new coffee information
-		option_2_prompts(s, name, small_cost, medium_cost, large_cost); // Possibly have a more efficient way of doing this
+		option_2_prompts(name, small_cost, medium_cost, large_cost);
 		// Create a new coffee object
 		coffee c;
-		menu m; // use constructor to make this when making shop object!!!
-		// Creates & populates coffees array, and adds new coffee to array
-		s.option_2(m, c, input_stream_to_menu, output_stream_to_menu, name, small_cost, medium_cost, large_cost);
+		// Populates new coffee object with information from user
+		s.option_2(c, name, small_cost, medium_cost, large_cost);
+		// Adds new coffee object to coffees array (menu)
+		s.add_coffee_to_menu(c);
 		// Prints message that new drink has been added to menu
 		std::cout << "This new drink has been successfully added to the coffee menu!" << std::endl;
 	} else if (option == 3) {
 		menu m; // use constructor to make this when making shop object!!!
 		// Prints menu (drink options) to terminal
-		s.print_drink_options(m);
+		s.print_drink_options();
 		// Get user selection for drink to remove
 		int user_selection = s.get_user_selection();
 		// Removes user_selection from menu;
-		s.remove_coffee_from_array(m, user_selection);
+		s.remove_coffee_from_array(user_selection);
 		std::cout << "This drink has been successfully removed from the coffee menu!" << std::endl;
 		// TODO Guide user through removing a coffee from the menu
 	} else if (option == 4) {
@@ -127,19 +136,23 @@ void execute_option(shop& s, int option) {
 		// Prompt for coffee name to search
 		std::string coffee_name = option_4_prompts();
 		// Prints information about the coffee selected
-		s.option_4(m, coffee_name);
+		s.option_4(coffee_name);
 	} else if (option == 5) {
 		menu m; // use constructor to make this when making shop object
 		double budget = option_5_prompts(); // Prompt for budget to search
-		s.option_5(m, budget); // Prints drinks that meet budget requirements
+		s.option_5(budget); // Prints drinks that meet budget requirements
 	} else if (option == 6) {
 		menu m; // use constructor to make this when making shop object
-		s.print_drink_options(m); // Prints menu (drink options)
+		s.print_drink_options(); // Prints menu (drink options)
 		int selection = option_6_prompt_for_selection(); // Prompt for drink number to search
-		s.option_6(m, selection); // Prints information about specific drink 
+		s.option_6(selection); // Prints information about specific drink 
 		char size = option_6_prompt_for_size(); // Prompt for drink size
 		char quantity = option_6_prompt_for_quantity(); // Prompt for quantity
-
-
+		s.option_6(selection);
+		order o;
+		s.populate_new_order(o, selection, size, quantity);
+		s.add_order(o);
+		s.calculate_order_cost(o);
+		s.print_order_message(o);
 	}
 }

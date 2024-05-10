@@ -20,6 +20,12 @@ public:
 	 *		quantity.
 	 */
 	order();
+
+	void set_order_from_user(int order_number, std::string coffee_name, char coffee_size, int quantity);
+	int get_order_number();
+	std::string get_coffee_name();
+	char get_order_size();
+	int get_order_quantity();
 };
 
 #endif

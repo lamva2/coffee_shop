@@ -37,8 +37,10 @@ int get_option();
  */
 void execute_option(shop& s, int option);
 
-void option_2_prompts(const shop& s, std::string name, double small_cost, double medium_cost, double large_cost);
+void option_2_prompts(std::string name, double small_cost, double medium_cost, double large_cost);
 
 std::string option_4_prompts();
+
+void create_coffees_array(shop& s);
 
 #endif

@@ -14,33 +14,53 @@ menu::~menu() {
     }
 }
 
-// Find number of coffees. Delcare stream to file in shop.cpp
-int menu::find_num_coffees(std::ifstream& file) {
-    file >> this->num_coffees;
+int menu::get_num_coffees() {
     return this->num_coffees;
 }
 
+std::string menu::get_coffee_name(int index) {
+    return (this->coffees[index].get_coffee_name());
+}
 
+double menu::get_small_cost(int index) {
+    return (this->coffees[index].get_small_cost());
+}
+
+double menu::get_medium_cost(int index) {
+    return (this->coffees[index].get_medium_cost());
+}
+
+double menu::get_large_cost(int index) {
+    return (this->coffees[index].get_large_cost());
+}
+
+// Populating Coffee Pointer Functions:
 // Sets coffees pointer to coffees array
 void menu::create_coffee_array() {
     this->coffees = new coffee[this->num_coffees];
 }
-
-
 // Populates coffees array with information from file
-void menu::populate_coffee_array(int num_coffees, std::ifstream& file) {
+void menu::populate_coffee_array(std::ifstream& file) {
     for (int i = 0; i < this->num_coffees; i++) {
-        this->coffees[i].set_a_coffee(this->coffees[i], file);
+        this->coffees[i].set_a_coffee(file);
     }
 }
 
+void menu::print_menu() {
+    std::cout << "Here is our menu:" << std::endl;
+    for (int i = 0; i < this->num_coffees; i++) {
+        std::cout << (i+1) << ". " << this->coffees[i].get_coffee_name() << std::endl
+            << "\t" << "Small - " << this->coffees[i].get_small_cost() << std::endl
+            <<  "\t" << "Medium - " << this->coffees[i].get_medium_cost() << std::endl
+            << "\t" << "Large - " << this->coffees[i].get_large_cost() << std::endl;
+    }
+}
 
+// Option 2 Functions (Adding new coffee to menu):
 // Populates a new coffee object from information given by the user
 void menu::populate_new_coffee(coffee& c, std::string name, double small, double medium, double large) {
     c.set_a_coffee_from_user(name, small, medium, large);
 }
-
-
 // Creates a larger array to store added coffees
 void menu::add_coffee(const coffee& c) {
     // Creates new, bigger array to store existing coffees plus the new coffee
@@ -81,18 +101,22 @@ void menu::remove_coffee(int coffee_number) {
     this->num_coffees--;
 }
 
-// For option 3 and option 6, prints drink options from menu
+// For option 3 (remove a coffee) and option 6 (place an order), prints drink options from menu
 void menu::print_drink_options() {
     for (int i = 0; i < this->num_coffees; i++) {
         std::cout << (i+1) << ". " << this->coffees[i].get_coffee_name() << std::endl;
     }
 }
 
+// Option 4 (Search by coffee name)
 void menu::display_coffee_with_name(const std::string& name) {
     bool exists = false;
     for (int i = 0; i < this->num_coffees; i++) {
         if (this->coffees[i].get_coffee_name() == name) {
-            this->coffees[i].get_coffee_info();
+            std::cout << "Results: " << std::endl;
+            std::cout << this->coffees[i].get_coffee_name() << std::endl << "Small: " << this->coffees[i].get_small_cost() 
+                << std::endl << "Medium: " << this->coffees[i].get_medium_cost() << std::endl << "Large: " 
+                << this->coffees[i].get_large_cost() << std::endl;
             exists = true;
         } else {
             continue;
@@ -103,6 +127,7 @@ void menu::display_coffee_with_name(const std::string& name) {
     }
 }
 
+// Option 5 (search by price)
 void menu::display_coffees_with_price(const double& budget) {
     for (int i = 0; i < this->num_coffees; i++) {
         if (this->coffees[i].get_small_cost() <= budget || 
@@ -121,10 +146,13 @@ void menu::display_coffees_with_price(const double& budget) {
     }
 }
 
+// Option 6 (place an order)
 void menu::display_coffee_with_index(const int& selection) {
     for (int i = 0; i < this->num_coffees; i++) {
         if ((i+1) == selection) {
-            this->coffees[i].get_coffee_info();
+            std::cout << this->coffees[i].get_coffee_name() << std::endl << "Small: " << this->coffees[i].get_small_cost() 
+                << std::endl << "Medium: " << this->coffees[i].get_medium_cost() << std::endl << "Large: " 
+                << this->coffees[i].get_large_cost() << std::endl;
         } 
     }
 }

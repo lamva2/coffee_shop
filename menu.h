@@ -23,6 +23,14 @@ public:
 	// Deconstructor for coffees
 	~menu();
 
+	// returns number of coffees
+	int get_num_coffees();
+	// returns name of coffee
+	std::string get_coffee_name(int index);
+	double get_small_cost(int index);
+	double get_medium_cost(int index);
+	double get_large_cost(int index);
+
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
 	 *		YOU MUST IMPLEMENT IT IN `menu.cpp`. THIS FUNCTION IS USED
@@ -36,9 +44,9 @@ public:
 	 */
 	void add_coffee(const coffee& c);
 
-	int find_num_coffees(std::ifstream& file);
 	void create_coffee_array();
-	void populate_coffee_array(int num_coffees, std::ifstream& file);
+	void populate_coffee_array(std::ifstream& file);
+	void print_menu();
 	void populate_new_coffee(coffee& c, std::string name, double small, double medium, double large);
 	void remove_coffee(int coffee_number);
 	void print_drink_options();
