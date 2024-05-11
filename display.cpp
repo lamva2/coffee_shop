@@ -40,7 +40,8 @@ int get_option() {
 	return option;
 }
 
-void option_2_prompts(std::string name, double small_cost, double medium_cost, double large_cost) {
+void option_2_prompts(std::string& name, double& small_cost, double& medium_cost, double& large_cost) {
+	std::cout << std::endl;
 	std::cout << "Enter the name of the new coffee drink (in 1 word): ";
 	std::cin >> name;
 	std::cout << "Enter price of small size (8oz): ";
@@ -52,6 +53,7 @@ void option_2_prompts(std::string name, double small_cost, double medium_cost, d
 } 
 
 std::string option_4_prompts() {
+	std::cout << std::endl;
 	std::string name;
 	std::cout << "Enter the coffee name: ";
 	std::cin >> name;
@@ -59,6 +61,7 @@ std::string option_4_prompts() {
 }
 
 double option_5_prompts() {
+	std::cout << std::endl;
 	double budget;
 	std::cout << "Enter your budget for 1 drink, and I will list out our products that are cheaper or equal to your budget: ";
 	std::cin >> budget;
@@ -92,6 +95,8 @@ void create_coffees_array(shop& s) {
 	// Create input stream to menu.txt file
 	std::ifstream input_stream_to_menu;
     input_stream_to_menu.open("menu.txt");
+	// Sts number of coffees variable in menu
+	s.set_num_coffees(input_stream_to_menu);
 	// Creates and populates initial coffees array
 	s.coffee_array(input_stream_to_menu);
 }
@@ -121,38 +126,42 @@ void execute_option(shop& s, int option) {
 		s.add_coffee_to_menu(c);
 		// Prints message that new drink has been added to menu
 		std::cout << "This new drink has been successfully added to the coffee menu!" << std::endl;
+		std::cout << std::endl;
 	} else if (option == 3) {
-		menu m; // use constructor to make this when making shop object!!!
+		std::cout << std::endl;
 		// Prints menu (drink options) to terminal
 		s.print_drink_options();
+		std::cout << std::endl;
 		// Get user selection for drink to remove
 		int user_selection = s.get_user_selection();
 		// Removes user_selection from menu;
 		s.remove_coffee_from_array(user_selection);
 		std::cout << "This drink has been successfully removed from the coffee menu!" << std::endl;
+		std::cout << std::endl;
 		// TODO Guide user through removing a coffee from the menu
 	} else if (option == 4) {
-		menu m; // use constructor to make this when making shop object
 		// Prompt for coffee name to search
 		std::string coffee_name = option_4_prompts();
+		std::cout << std::endl;
 		// Prints information about the coffee selected
 		s.option_4(coffee_name);
+		std::cout << std::endl;
 	} else if (option == 5) {
-		menu m; // use constructor to make this when making shop object
 		double budget = option_5_prompts(); // Prompt for budget to search
 		s.option_5(budget); // Prints drinks that meet budget requirements
 	} else if (option == 6) {
-		menu m; // use constructor to make this when making shop object
+		std::cout << std::endl;
 		s.print_drink_options(); // Prints menu (drink options)
+		std::cout << std::endl;
 		int selection = option_6_prompt_for_selection(); // Prompt for drink number to search
 		s.option_6(selection); // Prints information about specific drink 
 		char size = option_6_prompt_for_size(); // Prompt for drink size
 		char quantity = option_6_prompt_for_quantity(); // Prompt for quantity
-		s.option_6(selection);
 		order o;
 		s.populate_new_order(o, selection, size, quantity);
 		s.add_order(o);
-		s.calculate_order_cost(o);
+		double total_cost = s.calculate_order_cost(o);
+		std::cout << "Your total cost is: " << "$" << total_cost << std::endl;
 		s.print_order_message(o);
 	}
 }

@@ -14,6 +14,11 @@ menu::~menu() {
     }
 }
 
+int menu::set_num_coffees(std::ifstream& file) {
+    file >> this->num_coffees;
+    return this->num_coffees;
+}
+
 int menu::get_num_coffees() {
     return this->num_coffees;
 }
@@ -54,6 +59,7 @@ void menu::print_menu() {
             <<  "\t" << "Medium - " << this->coffees[i].get_medium_cost() << std::endl
             << "\t" << "Large - " << this->coffees[i].get_large_cost() << std::endl;
     }
+    std::cout << std::endl;
 }
 
 // Option 2 Functions (Adding new coffee to menu):
@@ -132,7 +138,7 @@ void menu::display_coffees_with_price(const double& budget) {
     for (int i = 0; i < this->num_coffees; i++) {
         if (this->coffees[i].get_small_cost() <= budget || 
             this->coffees[i].get_medium_cost() <= budget || this-> coffees[i].get_medium_cost() <= budget) {
-                std::cout << this->coffees[i].get_coffee_name();
+                std::cout << this->coffees[i].get_coffee_name() << std::endl;
             }
         if (this->coffees[i].get_small_cost() <= budget) {
             std::cout << "Small: " << this->coffees[i].get_small_cost() << std::endl;   
@@ -144,6 +150,7 @@ void menu::display_coffees_with_price(const double& budget) {
             std::cout << "Large: " << this->coffees[i].get_large_cost() << std::endl;
         }
     }
+    std::cout << std::endl;
 }
 
 // Option 6 (place an order)

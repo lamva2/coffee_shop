@@ -34,6 +34,9 @@ public:
 	// Deconstructor
 	~shop();
 
+	// Gets the number of coffees
+	void set_num_coffees(std::ifstream& file);
+
 	// Creates and populates initial coffees array
 	void coffee_array(std::ifstream& file);
 

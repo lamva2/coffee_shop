@@ -15,6 +15,10 @@ shop::~shop() {
     }
 }
 
+void shop::set_num_coffees(std::ifstream& file) {
+    this->m.set_num_coffees(file);
+}
+
 // Calls public menu member functions to populate coffees array and add new coffee to the array (option 2)
 void shop::coffee_array(std::ifstream& file) {
     this->m.create_coffee_array();
@@ -51,6 +55,7 @@ void shop::print_orders() {
             << this->orders[i].get_order_size() << " "
             << this->orders[i].get_order_quantity() << std::endl;
     }
+    std::cout << std::endl;
 }
 
 // Populates new coffee object with information from user

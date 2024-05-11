@@ -25,6 +25,8 @@ public:
 
 	// returns number of coffees
 	int get_num_coffees();
+	// Sets the number of coffees from file
+	int set_num_coffees(std::ifstream& file);
 	// returns name of coffee
 	std::string get_coffee_name(int index);
 	double get_small_cost(int index);
