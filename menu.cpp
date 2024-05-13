@@ -14,6 +14,26 @@ menu::~menu() {
     }
 }
 
+menu::menu(const menu& existing_menu) : num_coffees(existing_menu.num_coffees), coffees(new coffee[num_coffees]) {
+    for (int i = 0; i < num_coffees; i++) {
+        this->coffees[i] = existing_menu.coffees[i];
+    }   
+}
+
+void menu::operator=(const menu& other_menu) {
+    if (this == &other_menu) {
+        return;
+    }
+    if (coffees != nullptr) {
+        delete [] coffees;
+    }
+    num_coffees = other_menu.num_coffees;
+    coffees = new coffee[num_coffees];
+    for (int i = 0; i < num_coffees; i++) {
+        coffees[i] = other_menu.coffees[i];
+    }
+}
+
 int menu::set_num_coffees(std::ifstream& file) {
     file >> this->num_coffees;
     return this->num_coffees;
@@ -150,7 +170,9 @@ void menu::display_coffees_with_price(const double& budget) {
                 std::cout << "Large: " << this->coffees[i].get_large_cost() << std::endl;
             }
         } else {
-            std::cout << "Sorry, no drinks match that budget." << std::endl;
+            if (i == this->num_coffees - 1) {
+                std::cout << "Sorry, no drinks match that budget." << std::endl;
+            }
         }
     }
     std::cout << std::endl;

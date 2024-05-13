@@ -15,6 +15,26 @@ shop::~shop() {
     }
 }
 
+shop::shop(const shop& existing_shop) : num_orders(existing_shop.num_orders), orders(new order[num_orders]) {
+    for (int i = 0; i < num_orders; i++) {
+        this->orders[i] = existing_shop.orders[i];
+    }   
+}
+
+void shop::operator=(const shop& other_shop) {
+    if (this == &other_shop) {
+        return;
+    }
+    if (orders != nullptr) {
+        delete [] orders;
+    }
+    num_orders = other_shop.num_orders;
+    orders = new order[num_orders];
+    for (int i = 0; i < num_orders; i++) {
+        orders[i] = other_shop.orders[i];
+    }
+}
+
 void shop::set_num_coffees(std::ifstream& file) {
     this->m.set_num_coffees(file);
 }

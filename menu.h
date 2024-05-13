@@ -23,6 +23,13 @@ public:
 	// Deconstructor for coffees
 	~menu();
 
+	// Copy Constructor
+	menu(const menu& existing_menu);
+
+	// Assignment Operator
+	void operator=(const menu& other_menu);
+    
+
 	// returns number of coffees
 	int get_num_coffees();
 	// Sets the number of coffees from file

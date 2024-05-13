@@ -34,6 +34,12 @@ public:
 	// Deconstructor
 	~shop();
 
+	// Copy Constructor
+	shop(const shop& existing_shop);
+
+	// Assignmnet Operator
+	void operator=(const shop& other_shop);
+
 	// Gets the number of coffees
 	void set_num_coffees(std::ifstream& file);
 
