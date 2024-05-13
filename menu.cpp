@@ -168,8 +168,9 @@ void menu::display_coffee_with_index(const int& selection) {
 }
 
 void menu::rewrite_menu(std::ofstream& file) {
-    file >> this->get_num_coffees() >> "\n";
+    file << this->get_num_coffees() << "\n";
     for (int i = 0; i < this->num_coffees; i++) {
-        file >> this->coffees[i].get_coffee_name() >> " " >> this->coffees[i].get_small_cost() >> " " >> this->coffees[i].get_medium_cost() >> " " >> this->coffees[i].get_large_cost() >> "\n";
+        file << this->coffees[i].get_coffee_name() << " " << this->coffees[i].get_small_cost() << " " << this->coffees[i].get_medium_cost() 
+            << " " << this->coffees[i].get_large_cost() << "\n";
     }
 }

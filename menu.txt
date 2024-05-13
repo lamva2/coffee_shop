@@ -1,5 +1,4 @@
-4
-Mocha 3.80 4.20 4.60
+3
+Mocha 3.8 4.2 4.6
 Americano 3.45 3.65 3.95
 Cappuccino 3.75 4.15 4.45
-Latte 3.95 4.45 4.95

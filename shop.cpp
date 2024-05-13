@@ -158,9 +158,10 @@ void shop::print_order_message(order& o) {
 }
 
 void shop::write_orders_to_file(std::ofstream& file) {
-    file >> this->num_orders >> "\n";
+    file << this->num_orders << "\n";
     for (int i = 0; i < this->num_orders; i++) {
-        file >> this->orders[i].get_order_number() >> " " >> this->orders[i].get_coffee_name() >> " " >> this->orders[i].get_order_size() >> " " >> this->orders[i].get_order_quantity() >> "\n";
+        file << this->orders[i].get_order_number() << " " << this->orders[i].get_coffee_name() << " " 
+            << this->orders[i].get_order_size() << " " << this->orders[i].get_order_quantity() << "\n";
     }
 }
 
