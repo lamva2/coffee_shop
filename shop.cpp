@@ -157,3 +157,14 @@ void shop::print_order_message(order& o) {
     std::cout << "Your order has been placed. Your order number is " << o.get_order_number() << "." << std::endl;
 }
 
+void shop::write_orders_to_file(std::ofstream& file) {
+    file >> this->num_orders >> "\n";
+    for (int i = 0; i < this->num_orders; i++) {
+        file >> this->orders[i].get_order_number() >> " " >> this->orders[i].get_coffee_name() >> " " >> this->orders[i].get_order_size() >> " " >> this->orders[i].get_order_quantity() >> "\n";
+    }
+}
+
+void shop::write_to_files(std::ofstream& menu_file, std::ofstream& orders_file) {
+    this->m.rewrite_menu(menu_file);
+    this->write_orders_to_file(orders_file);
+}

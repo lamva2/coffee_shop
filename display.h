@@ -43,4 +43,6 @@ std::string option_4_prompts();
 
 void create_coffees_array(shop& s);
 
+void create_output_streams(shop& s);
+
 #endif

@@ -95,7 +95,7 @@ void create_coffees_array(shop& s) {
 	// Create input stream to menu.txt file
 	std::ifstream input_stream_to_menu;
     input_stream_to_menu.open("menu.txt");
-	// Sts number of coffees variable in menu
+	// Sets number of coffees variable in menu
 	s.set_num_coffees(input_stream_to_menu);
 	// Creates and populates initial coffees array
 	s.coffee_array(input_stream_to_menu);
@@ -164,4 +164,17 @@ void execute_option(shop& s, int option) {
 		std::cout << "Your total cost is: " << "$" << total_cost << std::endl;
 		s.print_order_message(o);
 	}
+}
+
+// Creates ouput streams to files (menu.txt and orders.txt)
+void create_output_streams(shop& s) {
+	// Create output stream to menu.txt file
+	std::ofstream stream_to_menu;
+    stream_to_menu.open("menu.txt");
+	// Create output stream to orders.txt file
+	std::ofstream stream_to_orders;
+	stream_to_orders.open("orders.txt");
+	
+	// Rewrite files
+	s.write_to_files(stream_to_menu, stream_to_orders);
 }

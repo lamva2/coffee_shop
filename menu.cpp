@@ -139,15 +139,18 @@ void menu::display_coffees_with_price(const double& budget) {
         if (this->coffees[i].get_small_cost() <= budget || 
             this->coffees[i].get_medium_cost() <= budget || this-> coffees[i].get_medium_cost() <= budget) {
                 std::cout << this->coffees[i].get_coffee_name() << std::endl;
+            
+            if (this->coffees[i].get_small_cost() <= budget) {
+                std::cout << "Small: " << this->coffees[i].get_small_cost() << std::endl;   
             }
-        if (this->coffees[i].get_small_cost() <= budget) {
-            std::cout << "Small: " << this->coffees[i].get_small_cost() << std::endl;   
-        }
-        if (this-> coffees[i].get_medium_cost() <= budget) {
-            std::cout << "Medium: " << this->coffees[i].get_medium_cost() << std::endl;
-        }
-        if (this-> coffees[i].get_large_cost() <= budget) {
-            std::cout << "Large: " << this->coffees[i].get_large_cost() << std::endl;
+            if (this-> coffees[i].get_medium_cost() <= budget) {
+                std::cout << "Medium: " << this->coffees[i].get_medium_cost() << std::endl;
+            }
+            if (this-> coffees[i].get_large_cost() <= budget) {
+                std::cout << "Large: " << this->coffees[i].get_large_cost() << std::endl;
+            }
+        } else {
+            std::cout << "Sorry, no drinks match that budget." << std::endl;
         }
     }
     std::cout << std::endl;
@@ -161,5 +164,12 @@ void menu::display_coffee_with_index(const int& selection) {
                 << std::endl << "Medium: " << this->coffees[i].get_medium_cost() << std::endl << "Large: " 
                 << this->coffees[i].get_large_cost() << std::endl;
         } 
+    }
+}
+
+void menu::rewrite_menu(std::ofstream& file) {
+    file >> this->get_num_coffees() >> "\n";
+    for (int i = 0; i < this->num_coffees; i++) {
+        file >> this->coffees[i].get_coffee_name() >> " " >> this->coffees[i].get_small_cost() >> " " >> this->coffees[i].get_medium_cost() >> " " >> this->coffees[i].get_large_cost() >> "\n";
     }
 }

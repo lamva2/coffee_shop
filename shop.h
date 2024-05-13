@@ -104,6 +104,10 @@ public:
 	double calculate_order_cost(order& o);
 	void calculate_revenue(double& revenue, double new_order);
 	void print_order_message(order& o);
+
+	void write_orders_to_file(std::ofstream& file);
+	void write_to_files(std::ofstream& menu_file, std::ofstream& orders_file);
+
 };
 
 #endif

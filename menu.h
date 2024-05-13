@@ -55,6 +55,8 @@ public:
 	void display_coffee_with_name(const std::string& name);
 	void display_coffees_with_price(const double& budget);
 	void display_coffee_with_index(const int& selection);
+
+	void rewrite_menu(std::ofstream& file);
 };
 
 #endif

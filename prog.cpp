@@ -20,6 +20,7 @@ int main() {
 		}
 	} while (option != 7);
 
+	create_output_streams(s);
 
 
 	return 0;
