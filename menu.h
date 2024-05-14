@@ -38,7 +38,7 @@ public:
 	menu(const menu& existing_menu);
 
 	/*
-	 Name: operator (assignment operator)
+	 Name: operator= (assignment operator overload)
 	 Description: Changes an existing menu to have the data of another 
 		existing menu
 	 Parameters: 

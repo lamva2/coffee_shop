@@ -9,14 +9,13 @@
 
 class shop {
 private:
-	menu m;
+	menu m; // Menu of shop
 
-	std::string phone;
-	std::string address;
-	double revenue = 0;
+	std::string phone; // Phone number of shop
+	std::string address; // Address of shop
+	double revenue = 0; // Revenue of shop
 
-	// Number of orders
-	int num_orders = 0;
+	int num_orders = 0; // Number of orders
 
 	// Base address of order array (nullptr if array is empty)
 	order* orders = nullptr;
@@ -31,42 +30,122 @@ public:
 	 */
 	shop();
 
-	// Deconstructor
+	/*
+	 Name: ~shop (default destructor)
+	 Description: Destructs a shop object
+	*/
 	~shop();
 
-	// Copy Constructor
+	/*
+	 Name: shop (copy constructor)
+	 Description: Constructs a new shop by copying over data of existing shop
+	 Parameters: 
+	 	existing_shop (const shop&): a reference to a shop that has already 
+			been created
+	*/
 	shop(const shop& existing_shop);
 
-	// Assignmnet Operator
+	/*
+	 Name: operator= (assignment operator overload)
+	 Description: Changes an existing shop to have the data of another 
+		existing shop (deep copy)
+	 Parameters: 
+	 	other_shop (const shop&): a reference to another shop that has already
+			been created
+	*/
 	void operator=(const shop& other_shop);
 
-	// Gets the number of coffees
+	/*
+	 Name: set_num_coffees
+	 Description: Sets the number of coffees in the shop from information
+	 	from file (menu.txt)
+	 Parameters:
+	 	file (std::ifstream&): reference to input stream to file (menu.txt)
+	*/
 	void set_num_coffees(std::ifstream& file);
 
-	// Creates and populates initial coffees array
+	/*
+	 Name: coffee_array
+	 Description: Creates and populates initial coffees array on the heap.
+	 Parameters:
+	 	file (std::ifstream&): reference to input stream to file (menu.txt)
+	*/
 	void coffee_array(std::ifstream& file);
 
-	// Creates initial orders array
+	/*
+	 Name: orders_array
+	 Description: Creates initial order array and points orders pointer in shop
+	 	to it. Initially of size 0.
+	*/
 	void orders_array();
 
-	// Prints menu to terminal
+	/*
+	 Name: print_menu
+	 Description: Prints menu from coffees array to terminal.
+	*/
 	void print_menu();
 
-	// Option 2 functions
+	/*
+	 Name: option_2
+	 Description: Populates a new coffee object with information from the user
+	 	for option 2 (add a coffee to menu).
+	 Parameters:
+	 	c (coffee&): reference to a coffee object
+		name (std::string): name of coffee
+		small (double): small cost of coffee
+		medium (double): medium cost of coffee
+		large (double): large cost of coffee
+	*/
 	void option_2(coffee& c, std::string name, double small, double medium, double large);
 
-	// Option 3 functions
+	/*
+	 Name: get_user_selection
+	 Description: Prompts user for the drink they would like to remove 
+	 	(option 3). Error handles if user inputs invalid value.
+	*/
 	int get_user_selection();
+
+	/*
+	 Name: print_drink_options
+	 Description: Prints the drink options from the menu (coffees array) in
+		specific format.
+	*/
 	void print_drink_options();
+
+	/*
+	 Name: remove_coffee_from_array
+	 Description: Removes the coffee user selected from the menu (coffees array)
+	 Parameters:
+	 	user_input (int): drink option user wishes to remove
+	*/
 	void remove_coffee_from_array(int user_input);
 
-	// Option 4 functions
+	/*
+	 Name: option_4
+	 Description: Displays coffee information with name that user inputs
+	 	to the terminal
+	 Parameters: 
+	 	name (const std::string& name): reference to name user wants to search 
+			up
+	*/
 	void option_4(const std::string& name);
 
-	// Option 5 functions
+	/*
+	 Name: option_5
+	 Description: Displays coffees that meet the budget that the user
+	 	inputs to the terminal
+	 Parameters: 
+	 	budget (const double&): reference to budget user inputs
+	*/
 	void option_5(const double& budget);
 
-	// Option 6 functions
+	/*
+	 Name: option_6
+	 Description: Displays information about the coffee the user would like to 
+	 	order to the terminal from the menu (coffees array)
+	 Parameters:
+	 	selection (const int&): reference to drink number user selected
+	*/
 	void option_6(const int& selection);
 
 	/*
@@ -99,18 +178,58 @@ public:
 	 * Description: Reads address and phone number of shop from file and
 	 * 		prints to terminal.
 	 * Parameters:
-	 *		o file (std::ifstream&): Reference to input file stream to file.
+	 *		file (std::ifstream&): Reference to input file stream to file.
 	 */
 	void populate_shop_from_file(std::ifstream& file);
 
+	/*
+	 Name: print_revenue
+	 Description: Prints the revenue of the shop that is calculated from
+	 	the orders array
+	*/
 	void print_revenue();
+
+	/*
+	 Name: print_orders
+	 Description: Prints the orders from the order array to the terminal
+	*/
 	void print_orders();
 
-	void populate_new_order(order& o, int selection, char coffee_size, int quantity);
+	/*
+	 Name: populate_new_order
+	 Description: Populates a new order object with information given by the 
+	 	user
+	 Parameters: 
+	 	o (order&): reference to an order object
+		selection (int): drink option user chose
+		coffee_size (char): size of coffee user orders
+		quantity (int): quantity of coffees user orders
+	*/
+	void populate_new_order(order& o, int selection, char coffee_size, 
+		int quantity);
+
+	/*
+	 Name: calculate_order_cost
+	 Description: Calculates the total cost of an order with data from order 
+	 	array
+	 Parameters: 
+	 	o (order&): reference to an order object
+	*/
 	double calculate_order_cost(order& o);
-	void calculate_revenue(double& revenue, double new_order);
+
+	/*
+	 Name: print_order_message
+	 Description: Prints message that order has been placed and the order number
+	 Parameters:
+	 	o (order&): reference to an order object
+	*/
 	void print_order_message(order& o);
 
+	/*
+	 Name: write_orders_to_file
+	 Description: 
+	 Parameters: 
+	*/
 	void write_orders_to_file(std::ofstream& file);
 	void write_to_files(std::ofstream& menu_file, std::ofstream& orders_file);
 

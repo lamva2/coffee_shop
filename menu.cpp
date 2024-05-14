@@ -191,6 +191,7 @@ void menu::display_coffee_with_name(const std::string& name) {
 
 // For option 5, dispalys the coffees that are equal to or less than the budget
 void menu::display_coffees_with_price(const double& budget) {
+    bool exists = false;
     for (int i = 0; i < this->num_coffees; i++) {
         // If the small, medium, or large costs are less than or equal to the 
         //      budget, print name of coffee
@@ -198,6 +199,7 @@ void menu::display_coffees_with_price(const double& budget) {
             this->coffees[i].get_medium_cost() <= budget || 
             this-> coffees[i].get_medium_cost() <= budget) {
                 std::cout << this->coffees[i].get_coffee_name() << std::endl;
+                exists = true;
             
             // If small cost is less than or equal to budget, print it.
             if (this->coffees[i].get_small_cost() <= budget) {
@@ -214,13 +216,12 @@ void menu::display_coffees_with_price(const double& budget) {
                 std::cout << "Large: " << this->coffees[i].get_large_cost() 
                     << std::endl;
             }
-        } else {
-            // If none of the small, medium, or large drinks meet budget, 
-            //      print error message.
-            if (i == this->num_coffees - 1) {
-                std::cout << "Sorry, no drinks match that budget." << std::endl;
-            }
-        }
+        } 
+    }
+    // If none of the small, medium, or large drinks meet budget, 
+    //      print error message.
+    if (exists == false) {
+            std::cout << "Sorry, no drinks match that budget." << std::endl;
     }
     std::cout << std::endl;
 }

@@ -4,6 +4,7 @@
  	coffee shop. Utilize classes, the Big 3, member functions, and implement
 	information hiding and encapsulation.
 */
+
 #include <iostream>
 #include "display.h"
 #include <fstream>
@@ -21,9 +22,7 @@ int main() {
 		option = get_option();
 		if (option >= 1 && option <= 6) {
 			execute_option(s, option);
-		} else {
-			print_selection_error();
-		}
+		} 
 	} while (option != 7);
 
 	create_output_streams(s);

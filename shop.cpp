@@ -69,6 +69,9 @@ void shop::print_revenue() {
 
 void shop::print_orders() {
     std::cout << "Order info:" << std::endl;
+    if (this->num_orders == 0) {
+        std::cout << "(No orders to display)" << std::endl;
+    }
     for (int i = 0; i < this->num_orders; i++) {
         std::cout << this->orders[i].get_order_number() << " "
             << this->orders[i].get_coffee_name() << " "
