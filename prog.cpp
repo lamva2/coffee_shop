@@ -1,3 +1,9 @@
+/*
+ Author: Valerie Lam
+ Description: C++ program that will simulate the basic functionalities of a 
+ 	coffee shop. Utilize classes, the Big 3, member functions, and implement
+	information hiding and encapsulation.
+*/
 #include <iostream>
 #include "display.h"
 #include <fstream>

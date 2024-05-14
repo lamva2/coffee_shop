@@ -44,12 +44,33 @@ void option_2_prompts(std::string& name, double& small_cost, double& medium_cost
 	std::cout << std::endl;
 	std::cout << "Enter the name of the new coffee drink (in 1 word): ";
 	std::cin >> name;
-	std::cout << "Enter price of small size (8oz): ";
-	std::cin >> small_cost;
-	std::cout << "Enter price of medium size (12oz): ";
-	std::cin >> medium_cost;
-	std::cout << "Enter price of large size (16oz): ";
-	std::cin >> large_cost;
+	do {
+		std::cout << "Enter price of small size (8oz): ";
+		std::cin >> small_cost;
+		if (small_cost > 0) {
+			break;
+		} else {
+			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+		}
+	} while (true);
+	do {
+		std::cout << "Enter price of medium size (12oz): ";
+		std::cin >> medium_cost;
+		if (medium_cost > 0) {
+			break;
+		} else {
+			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+		}
+	} while (true);
+	do {
+		std::cout << "Enter price of large size (16oz): ";
+		std::cin >> large_cost;
+		if (large_cost > 0) {
+			break;
+		} else {
+			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+		}
+	} while (true);
 } 
 
 std::string option_4_prompts() {
@@ -78,8 +99,15 @@ int option_6_prompt_for_selection() {
 
 char option_6_prompt_for_size() {
 	char size;
-	std::cout << "Enter the size: s-small, m-medium, l-large: ";
-	std::cin >> size;
+	do {
+		std::cout << "Enter the size: S-small, M-medium, L-large: ";
+		std::cin >> size;
+		if (size == 'S' | size == 'M' | size == 'L') {
+			break;
+		} else {
+			std::cout << "Not a valid size. Please re-eneter size." << std::endl;
+		}
+	} while (true);
 	return size;
 }
 

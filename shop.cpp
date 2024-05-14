@@ -96,8 +96,20 @@ void shop::print_drink_options() {
 // Gets user selection for drink to remove (option 3)
 int shop::get_user_selection() {
     int drink_selection;
-    std::cout << "Selection: ";
-    std::cin >> drink_selection;
+    bool valid = false;
+    do {
+        std::cout << "Selection: ";
+        std::cin >> drink_selection;
+        for (int i = 1; i <= this->m.get_num_coffees(); i++) {
+            if (drink_selection == i) {
+                valid = true;
+            }
+        }
+        if (valid == true) {
+            break;
+        }
+        std::cout << "Drink option not valid. Please re-enter a valid selection." << std::endl;
+    } while (true);
     return drink_selection;
 }
 
