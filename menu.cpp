@@ -95,10 +95,12 @@ void menu::populate_coffee_array(std::ifstream& file) {
 void menu::print_menu() {
     std::cout << "Here is our menu:" << std::endl;
     for (int i = 0; i < this->num_coffees; i++) {
-        std::cout << (i+1) << ". " << this->coffees[i].get_coffee_name() << std::endl
-            << "\t" << "Small - " << this->coffees[i].get_small_cost() << std::endl
-            <<  "\t" << "Medium - " << this->coffees[i].get_medium_cost() << std::endl
-            << "\t" << "Large - " << this->coffees[i].get_large_cost() << std::endl;
+        std::cout << (i+1) << ". " << this->coffees[i].get_coffee_name() 
+            << std::endl << "\t" << "Small - " 
+            << this->coffees[i].get_small_cost() << std::endl
+            <<  "\t" << "Medium - " << this->coffees[i].get_medium_cost() 
+            << std::endl << "\t" << "Large - " 
+            << this->coffees[i].get_large_cost() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -143,7 +145,8 @@ void menu::print_drink_options() {
 
 // Creates a smaller array to store coffees after removing a coffee
 void menu::remove_coffee(int coffee_number) {
-    // Creates new, smaller array to store existing coffees minus the removed coffee
+    // Creates new, smaller array to store existing coffees minus 
+    // the removed coffee
     coffee* new_coffees = new coffee[this->num_coffees - 1];
     // Copy the coffee elements from the old array to the new one (if it's not 
     //      empty; if it's empty, this loop will iterate 0 times)
@@ -229,7 +232,8 @@ void menu::display_coffees_with_price(const double& budget) {
 // For option 6, displays the coffee with the specific selection (index + 1)
 void menu::display_coffee_with_index(const int& selection) {
     for (int i = 0; i < this->num_coffees; i++) {
-        // If the index+1 equals the selection, print data on the coffee at index.
+        // If the index+1 equals the selection, print data on the coffee 
+        // at index.
         if ((i+1) == selection) {
             std::cout << this->coffees[i].get_coffee_name() << std::endl 
                 << "Small: " << this->coffees[i].get_small_cost() 

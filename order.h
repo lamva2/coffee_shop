@@ -31,7 +31,8 @@ public:
 		coffee_size (char): size of coffee ordered
 		quantity (int): number of coffee ordered 
 	*/
-	void set_order_from_user(int order_number, std::string coffee_name, char coffee_size, int quantity);
+	void set_order_from_user(int order_number, std::string coffee_name, 
+        char coffee_size, int quantity);
 
 	/*
 	 Name: get_order_number (getter)

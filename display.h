@@ -27,15 +27,16 @@ int get_option();
 
 /*
  Name: option_2_prompts
- Description: Prompts for name, small cost, medium cost, and large cost of coffee
-    user would like to add to menu. Error handles invalid inputs.
+ Description: Prompts for name, small cost, medium cost, and large cost 
+    of coffee user would like to add to menu. Error handles invalid inputs.
  Parameters:
     name (std::string&): name of coffee
     small_cost (double&): small cost of coffee
     medium_cost (double&): medium cost of coffee
     large_cost (double&): large cost of coffee
 */
-void option_2_prompts(std::string& name, double& small_cost, double& medium_cost, double& large_cost);
+void option_2_prompts(std::string& name, double& small_cost, 
+    double& medium_cost, double& large_cost);
 
 /*
  Name: option_4_prompts

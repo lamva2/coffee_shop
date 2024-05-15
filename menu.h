@@ -132,7 +132,8 @@ public:
 		medium (double): medium cost
 		large (double): large cost
 	*/
-	void populate_new_coffee(coffee& c, std::string name, double small, double medium, double large);
+	void populate_new_coffee(coffee& c, std::string name, double small, 
+        double medium, double large);
 
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
@@ -163,8 +164,8 @@ public:
 
 	/*
 	 Name: display_coffee_with_name
-	 Description: Prints to terminal coffee with name user would like to search up.
-	 	If name could not be found, error message printed.
+	 Description: Prints to terminal coffee with name user would like to 
+        search up. If name could not be found, error message printed.
 	 Parameters:
 	 	name (const std::string &): name of coffee user wishes to search up
 	*/

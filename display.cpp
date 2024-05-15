@@ -45,7 +45,8 @@ int get_option() {
 	return option;
 }
 
-void option_2_prompts(std::string& name, double& small_cost, double& medium_cost, double& large_cost) {
+void option_2_prompts(std::string& name, double& small_cost, 
+    double& medium_cost, double& large_cost) {
 	std::cout << std::endl;
 	// Prompt for name of coffee drink
 	std::cout << "Enter the name of the new coffee drink (in 1 word): ";
@@ -59,7 +60,8 @@ void option_2_prompts(std::string& name, double& small_cost, double& medium_cost
 			break;
 		} else {
 			// Print error message if input is invalid. Continue loop
-			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+			std::cout << "Not a valid price. Please re-enter price." 
+                << std::endl;
 		}
 	} while (true);
 	do {
@@ -71,7 +73,8 @@ void option_2_prompts(std::string& name, double& small_cost, double& medium_cost
 			break;
 		} else {
 			// Print error message if input is invalid. Continue loop
-			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+			std::cout << "Not a valid price. Please re-enter price." 
+                << std::endl;
 		}
 	} while (true);
 	do {
@@ -83,7 +86,8 @@ void option_2_prompts(std::string& name, double& small_cost, double& medium_cost
 			break;
 		} else {
 			// Print error message if input is invalid. Continue loop
-			std::cout << "Not a valid price. Please re-enter price." << std::endl;
+			std::cout << "Not a valid price. Please re-enter price." 
+                << std::endl;
 		}
 	} while (true);
 } 
@@ -94,7 +98,7 @@ std::string option_4_prompts() {
 	std::string name;
 	std::cout << "Enter the coffee name: ";
 	std::cin >> name;
-	// Return coffee name
+    // Return coffee name
 	return name;
 }
 
@@ -102,9 +106,17 @@ double option_5_prompts() {
 	// Prompt for budget
 	std::cout << std::endl;
 	double budget;
-	std::cout << "Enter your budget for 1 drink, and I will list out our " 
-		<< "products that are cheaper or equal to your budget: ";
-	std::cin >> budget;
+    do {
+	    std::cout << "Enter your budget for 1 drink, and I will list out our " 
+	    	<< "products that are cheaper or equal to your budget: ";
+	    std::cin >> budget;
+        if (budget > 0) {
+                // If budget is greater than 0 (valid), break out of loop.
+                break;
+        }
+        // If budget is not valid, print error message and continue loop
+        std::cout << "Not a valid budget. Please re-enter budget." << std::endl;
+    } while (true);
 	std::cout << std::endl;
 	// Return budget
 	return budget;
@@ -113,7 +125,8 @@ double option_5_prompts() {
 int option_6_prompt_for_selection() {
 	int selection;
 	// Prompt for the drink selection user would like to order
-	std::cout << "Which of the drinks above would you like to order? Enter here: ";
+	std::cout << "Which of the drinks above would you like to order? " 
+        << "Enter here: ";
 	std::cin >> selection;
 	// Return drink selection
 	return selection;
@@ -183,7 +196,8 @@ void execute_option(shop& s, int option) {
 		// Adds new coffee object to coffees array (menu)
 		s.add_coffee_to_menu(c);
 		// Prints message that new drink has been added to menu
-		std::cout << "This new drink has been successfully added to the coffee menu!" << std::endl;
+		std::cout << "This new drink has been successfully added to the coffee"
+            << " menu!" << std::endl;
 		std::cout << std::endl;
 	} else if (option == 3) {
 		std::cout << std::endl;
@@ -194,7 +208,8 @@ void execute_option(shop& s, int option) {
 		int user_selection = s.get_user_selection();
 		// Removes user_selection from menu;
 		s.remove_coffee_from_array(user_selection);
-		std::cout << "This drink has been successfully removed from the coffee menu!" << std::endl;
+		std::cout << "This drink has been successfully removed from the coffee "
+            << "menu!" << std::endl;
 		std::cout << std::endl;
 		// TODO Guide user through removing a coffee from the menu
 	} else if (option == 4) {
@@ -211,7 +226,8 @@ void execute_option(shop& s, int option) {
 		std::cout << std::endl;
 		s.print_drink_options(); // Prints menu (drink options)
 		std::cout << std::endl;
-		int selection = option_6_prompt_for_selection(); // Prompt for drink number to search
+        // Prompt for drink number to search
+		int selection = option_6_prompt_for_selection();
 		s.option_6(selection); // Prints information about specific drink 
 		char size = option_6_prompt_for_size(); // Prompt for drink size
 		char quantity = option_6_prompt_for_quantity(); // Prompt for quantity
@@ -219,7 +235,8 @@ void execute_option(shop& s, int option) {
 		// Populates order object with data from user
 		s.populate_new_order(o, selection, size, quantity);
 		s.add_order(o); // Add order to orders array
-		double total_cost = s.calculate_order_cost(o); // Calculates total cost of order
+        // Calculates total cost of order
+		double total_cost = s.calculate_order_cost(o);
 		// Prints total cost of order
 		std::cout << "Your total cost is: " << "$" << total_cost << std::endl;
 		// Print order message 

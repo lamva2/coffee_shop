@@ -92,7 +92,8 @@ void shop::print_orders() {
     std::cout << std::endl;
 }
 
-void shop::option_2(coffee& c, std::string name, double small, double medium, double large) {
+void shop::option_2(coffee& c, std::string name, double small, double medium, 
+    double large) {
     // Populate a new coffee object with information from the user
     this->m.populate_new_coffee(c, name, small, medium, large);
 }
@@ -126,7 +127,8 @@ int shop::get_user_selection() {
             break;
         }
         // If valid is still false, print following error message
-        std::cout << "Drink option not valid. Please re-enter a valid selection." << std::endl;
+        std::cout << "Drink option not valid. Please re-enter a " 
+            << "valid selection." << std::endl;
     } while (true);
     return drink_selection; // Return the valid drink selection
 }
@@ -151,7 +153,8 @@ void shop::option_6(const int& selection) {
     this->m.display_coffee_with_index(selection);
 }
 
-void shop::populate_new_order(order& o, int selection, char coffee_size, int quantity) {
+void shop::populate_new_order(order& o, int selection, char coffee_size, 
+    int quantity) {
     std::string coffee_name;
     for (int i = 0; i < this->m.get_num_coffees(); i++) {
         if ((i+1) == selection) {
@@ -160,14 +163,15 @@ void shop::populate_new_order(order& o, int selection, char coffee_size, int qua
         }
     }
     // Populates the order object with the informaiton given by the user
-    o.set_order_from_user(this->num_orders + 1, coffee_name, coffee_size, quantity);
+    o.set_order_from_user(this->num_orders + 1, coffee_name, coffee_size, 
+        quantity);
 }
  
 void shop::add_order(const order& o) {
     // Creates new, bigger array to store existing orders plus the new order
     order* new_orders = new order[this->num_orders + 1];
-    // Copy the coffee elements from the old array to the new one (if it's not empty; if it's empty,
-    //      this loop will iterate 0 times)
+    // Copy the coffee elements from the old array to the new one (if it's not 
+    //      empty; if it's empty, this loop will iterate 0 times)
     for (int i = 0; i < this->num_orders; i++) {
         new_orders[i] = this->orders[i];
     }
@@ -183,7 +187,8 @@ void shop::add_order(const order& o) {
     this->num_orders++;
 }
 
-// Calculates the cost of an order and returns it. Also adds order total cost to revenue.
+// Calculates the cost of an order and returns it. Also adds order total cost 
+//      to revenue.
 double shop::calculate_order_cost(order& o) {
     double cost_per_drink; // Cost per drink
     double total_cost; // Total cost of order
@@ -211,7 +216,8 @@ double shop::calculate_order_cost(order& o) {
 
 void shop::print_order_message(order& o) {
     // Prints order message with order number
-    std::cout << "Your order has been placed. Your order number is " << o.get_order_number() << "." << std::endl;
+    std::cout << "Your order has been placed. Your order number is " 
+        << o.get_order_number() << "." << std::endl;
 }
 
 void shop::write_orders_to_file(std::ofstream& file) {
@@ -219,8 +225,10 @@ void shop::write_orders_to_file(std::ofstream& file) {
     file << this->num_orders << "\n";
     for (int i = 0; i < this->num_orders; i++) {
         // Writes information of each order to file (orders.txt)
-        file << this->orders[i].get_order_number() << " " << this->orders[i].get_coffee_name() << " " 
-            << this->orders[i].get_order_size() << " " << this->orders[i].get_order_quantity() << "\n";
+        file << this->orders[i].get_order_number() << " " 
+            << this->orders[i].get_coffee_name() << " " 
+            << this->orders[i].get_order_size() << " " 
+            << this->orders[i].get_order_quantity() << "\n";
     }
 }
 

@@ -119,7 +119,8 @@ public:
 		medium (double): medium cost of coffee
 		large (double): large cost of coffee
 	*/
-	void option_2(coffee& c, std::string name, double small, double medium, double large);
+	void option_2(coffee& c, std::string name, double small, double medium, 
+        double large);
 
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
@@ -220,7 +221,8 @@ public:
 
 	/*
 	 Name: print_order_message
-	 Description: Prints message that order has been placed and the order number
+	 Description: Prints message that order has been placed and the 
+        order number
 	 Parameters:
 	 	o (order&): reference to an order object
 	*/

@@ -42,7 +42,8 @@ public:
 		medium (double): Price of medium coffee
 		large (double): Price of large coffee
 	*/
-	void set_a_coffee_from_user(std::string name, double small, double medium, double large);
+	void set_a_coffee_from_user(std::string name, double small, double medium, 
+        double large);
 
 	/*
 	 Name: get_a_coffee_name (getter)
@@ -60,7 +61,8 @@ public:
 
 	/*
 	 Name: get_medium_cost (getter)
-	 Description: Gets the medium cost of a coffee object (medium cost is private)
+	 Description: Gets the medium cost of a coffee object 
+        (medium cost is private)
 	 Return (double): medium cost of coffee object
 	*/
 	double get_medium_cost();
