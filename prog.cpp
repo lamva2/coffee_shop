@@ -12,19 +12,18 @@
 int main() {
 	std::cout << "Welcome to the Coffee++ Cafe!" << std::endl;
 
-	// TODO Construct and initialize a shop object `s`, along with
-	// everything inside it, using data from the text files.
-
-	shop s; // Initializes shop object 's'
-	int option;
+	shop s; // Initializes shop object 's' and call constructor
+	int option; // intialize option for user to select
 	create_coffees_array(s); // Creates initial menu (coffees array)
 	do {
-		option = get_option();
+		option = get_option(); // Get user option
 		if (option >= 1 && option <= 6) {
+			// Execute options for specific shop object
 			execute_option(s, option);
 		} 
 	} while (option != 7);
-
+	// Create output streams and write coffees array and orders array
+	// to files (menu.txt and orders.txt)
 	create_output_streams(s);
 
 

@@ -1,6 +1,7 @@
 #ifndef SHOP_H
 #define SHOP_H
 
+#include <iostream>
 #include <string>
 #include <fstream>
 
@@ -80,10 +81,32 @@ public:
 	void orders_array();
 
 	/*
+	 * Name: populate_from_file
+	 * Description: Reads address and phone number of shop from file and
+	 * 		prints to terminal.
+	 * Parameters:
+	 *		file (std::ifstream&): Reference to input file stream to file.
+	 */
+	void populate_shop_from_file(std::ifstream& file);
+
+	/*
+	 Name: print_revenue
+	 Description: Prints the revenue of the shop that is calculated from
+	 	the orders array
+	*/
+	void print_revenue();
+
+	/*
 	 Name: print_menu
 	 Description: Prints menu from coffees array to terminal.
 	*/
 	void print_menu();
+
+	/*
+	 Name: print_orders
+	 Description: Prints the orders from the order array to the terminal
+	*/
+	void print_orders();
 
 	/*
 	 Name: option_2
@@ -99,11 +122,16 @@ public:
 	void option_2(coffee& c, std::string name, double small, double medium, double large);
 
 	/*
-	 Name: get_user_selection
-	 Description: Prompts user for the drink they would like to remove 
-	 	(option 3). Error handles if user inputs invalid value.
-	*/
-	int get_user_selection();
+	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
+	 *		YOU MUST IMPLEMENT IT IN `shop.cpp`. THIS FUNCTION IS USED
+	 *		BY THE BIG 3 TESTING SCRIPT.
+	 * Name: add_coffee_to_menu
+	 * Description: Adds a coffee to the shop's menu
+	 * Parameters:
+	 *		c (const coffee&): The coffee to add to the shop's menu
+	 * Post conditions: Coffee added to menu
+	 */
+	void add_coffee_to_menu(const coffee& c);
 
 	/*
 	 Name: print_drink_options
@@ -111,6 +139,13 @@ public:
 		specific format.
 	*/
 	void print_drink_options();
+
+	/*
+	 Name: get_user_selection
+	 Description: Prompts user for the drink they would like to remove 
+	 	(option 3). Error handles if user inputs invalid value.
+	*/
+	int get_user_selection();
 
 	/*
 	 Name: remove_coffee_from_array
@@ -147,18 +182,19 @@ public:
 	 	selection (const int&): reference to drink number user selected
 	*/
 	void option_6(const int& selection);
-
+	
 	/*
-	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
-	 *		YOU MUST IMPLEMENT IT IN `shop.cpp`. THIS FUNCTION IS USED
-	 *		BY THE BIG 3 TESTING SCRIPT.
-	 * Name: add_coffee_to_menu
-	 * Description: Adds a coffee to the shop's menu
-	 * Parameters:
-	 *		c (const coffee&): The coffee to add to the shop's menu
-	 * Post conditions: Coffee added to menu
-	 */
-	void add_coffee_to_menu(const coffee& c);
+	 Name: populate_new_order
+	 Description: Populates a new order object with information given by the 
+	 	user
+	 Parameters: 
+	 	o (order&): reference to an order object
+		selection (int): drink option user chose
+		coffee_size (char): size of coffee user orders
+		quantity (int): quantity of coffees user orders
+	*/
+	void populate_new_order(order& o, int selection, char coffee_size, 
+		int quantity);
 
 	/*
 	 * NOTE: THIS IS A REQUIRED FUNCTION. DO NOT ALTER ITS PROTOTYPE.
@@ -172,41 +208,6 @@ public:
 	 *		reallocated, and num_orders should be incremented by 1)
 	 */
 	void add_order(const order& o);
-
-	/*
-	 * Name: populate_from_file
-	 * Description: Reads address and phone number of shop from file and
-	 * 		prints to terminal.
-	 * Parameters:
-	 *		file (std::ifstream&): Reference to input file stream to file.
-	 */
-	void populate_shop_from_file(std::ifstream& file);
-
-	/*
-	 Name: print_revenue
-	 Description: Prints the revenue of the shop that is calculated from
-	 	the orders array
-	*/
-	void print_revenue();
-
-	/*
-	 Name: print_orders
-	 Description: Prints the orders from the order array to the terminal
-	*/
-	void print_orders();
-
-	/*
-	 Name: populate_new_order
-	 Description: Populates a new order object with information given by the 
-	 	user
-	 Parameters: 
-	 	o (order&): reference to an order object
-		selection (int): drink option user chose
-		coffee_size (char): size of coffee user orders
-		quantity (int): quantity of coffees user orders
-	*/
-	void populate_new_order(order& o, int selection, char coffee_size, 
-		int quantity);
 
 	/*
 	 Name: calculate_order_cost
@@ -227,10 +228,23 @@ public:
 
 	/*
 	 Name: write_orders_to_file
-	 Description: 
+	 Description: Writes data from orders array to file (orders.txt) using
+	 	output stream at the end of the program
 	 Parameters: 
+	 	file (std::ofstream&): reference to output stream file (orders.txt)
 	*/
 	void write_orders_to_file(std::ofstream& file);
+
+	/*
+	 Name: write_to_files
+	 Description: Writes both orders and menu to their respective files
+	 	(menu.txt and orders.txt)
+	 Parameters:
+	 	menu_file (std::ofstream&): reference to output stream to file 
+			(menu.txt)
+		orders_file (std::ofstream&): reference to output stream to file
+			(orders.txt)
+	*/
 	void write_to_files(std::ofstream& menu_file, std::ofstream& orders_file);
 
 };
